@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth.service';
+
 import { Component, signal } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class Login {
 
   // solicitamos los servicios necesarios
   constructor(
-    private AuthService: AuthService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
@@ -36,13 +37,13 @@ export class Login {
   onLogin() {
     this.error.set(''); // borra errores anteriores
 
-    this.AuthService.login({
+    this.authService.login({
       email: this.email(),
       password: this.password()
     }).subscribe({
-      next: (res) => {
+      next: (response) => {
         // guardamos token del usuario
-        localStorage.setItem('token', res.access_token);
+        this.authService.saveToken(response.access_token);
 
         // cambia de página sin recargar
         this.router.navigate(['/items']);
