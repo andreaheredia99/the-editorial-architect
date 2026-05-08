@@ -4,8 +4,25 @@
 
 <input type="password" placeholder="Password" (input)="onPasswordInput($event)" />
 
-<button (click)="onLogin()">Login</button>
+<button 
+(click)="onLogin()"
+[disabled]="loading()"
+> <!-- deshabilita botón si loading = true -->
+    @if(loading()){
+        Loading...
+    } @else {
+        Login
+    }
+</button>
+
+<p>
+    Don´t have an account?
+    <a routerLink="/register">
+        Register
+    </a>
+</p>
 
 @if (error()) {
 <p style="color:red;">{{ error() }}</p>
+
 }

@@ -1,1 +1,35 @@
-<p>register works!</p>
+<h1>Register</h1>
+
+<input type="email" placeholder="Email" (input)="onEmailInput($event)">
+
+<input type="password" placeholder="Password" (input)="onPasswordInput($event)">
+
+<button 
+(click)="onRegister()"
+[disabled]="loading()"
+>
+    @if(loading()) {
+        Loading...
+    } @else{
+        Register
+    }
+</button>
+
+<p>
+    Already have an account?
+    <a routerLink="/login">
+        Login
+    </a>
+</p>
+
+@if(error()) {
+<p>
+    {{ error() }}
+</p>
+}
+
+@if(success()) {
+<p>
+    {{ success() }}
+</p>
+}

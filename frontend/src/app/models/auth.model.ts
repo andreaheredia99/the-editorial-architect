@@ -8,3 +8,8 @@ export interface LoginRequest {
 export interface LoginResponse {
     access_token: string;
 }
+
+// Backend devuelve JSON, Angular necesita tiparlo.
+export interface RegisterResponse {
+    message: string;
+}

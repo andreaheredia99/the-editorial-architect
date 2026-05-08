@@ -3,7 +3,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest, LoginResponse } from '../models/auth.model';
+import { LoginRequest, LoginResponse, RegisterResponse } from '../models/auth.model';
 
 // Angular puede usar este servicio en toda la app
 @Injectable({
@@ -12,6 +12,9 @@ import { LoginRequest, LoginResponse } from '../models/auth.model';
 export class AuthService {
 
   private apiUrl = environment.apiUrl;
+
+  // URL register
+  private registerUrl = `${environment.apiUrl}/register`;
 
   // guarda el token o null
   private token = signal<string | null>(localStorage.getItem('token'));
@@ -24,6 +27,10 @@ export class AuthService {
   
   login(data: LoginRequest) {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data);
+  }
+
+  register(data: LoginRequest) {
+    return this.http.post<RegisterResponse>(this.registerUrl, data);
   }
 
   saveToken(token: string) {

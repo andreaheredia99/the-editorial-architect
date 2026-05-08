@@ -1,19 +1,20 @@
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { Component, signal } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
 
-  email = signal('');
-  password = signal('');
+  email = signal(''); // guardamos email
+  password = signal(''); // guardamos contraseña
   error = signal(''); // mensaje error para usuario
+  loading = signal(false); // petición (request)
 
   // solicitamos los servicios necesarios
   constructor(
@@ -36,12 +37,16 @@ export class Login {
   // Función LOGIN
   onLogin() {
     this.error.set(''); // borra errores anteriores
+    this.loading.set(true); // petición en proceso
 
     this.authService.login({
       email: this.email(),
       password: this.password()
     }).subscribe({
       next: (response) => {
+        // termina loading
+        this.loading.set(false);
+
         // guardamos token del usuario
         this.authService.saveToken(response.access_token);
 
@@ -49,6 +54,8 @@ export class Login {
         this.router.navigate(['/items']);
       },
       error: () => {
+        // termina loading
+        this.loading.set(false);
         this.error.set('Invalid credentials')
       }
     });
