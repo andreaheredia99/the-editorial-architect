@@ -211,3 +211,16 @@ __marimo__/
 node_modules/
 dist/
 .angular/
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Python env files
+*.env
+
+# VSCode
+.vscode/
+
+# Angular build cache
+frontend/.angular/
