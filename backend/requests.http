@@ -16,3 +16,30 @@ Content-Type: application/json
     "email": "test@gmail.com",
     "password": "1234"
 }
+
+### CREAR ITEM
+POST http://127.0.0.1:8000/items/
+Content-Type: application/json
+
+{
+  "title": "Segundo item",
+  "description": "Mi descripción"
+}
+
+### OBTENER ITEMS
+GET http://127.0.0.1:8000/items
+
+### OBTENER ITEMS POR ID
+GET http://127.0.0.1:8000/items/4
+
+### ACTUALIZAR ITEM
+PUT http://127.0.0.1:8000/items/4
+Content-Type: application/json
+
+{
+  "title": "Título actualizado",
+  "description": "Descripción actualizada"
+}
+
+### ELIMINAR ITEM
+DELETE http://127.0.0.1:8000/items/4

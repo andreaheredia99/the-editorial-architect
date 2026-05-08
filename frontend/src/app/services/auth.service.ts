@@ -16,14 +16,17 @@ export class AuthService {
   // URL register
   private registerUrl = `${environment.apiUrl}/register`;
 
-  // guarda el token o null
-  private token = signal<string | null>(localStorage.getItem('token'));
+  // empieza en null hasta cargar localStorage
+  private token = signal<string | null>(null);
 
   // convierte token existente (true) o null (false)
   isAuthenticated = computed(() => !!this.token());
 
   // para hacer peticiones http
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // servicio se crea, intenta recuperar token guardado
+    this.loadToken();
+   }
   
   login(data: LoginRequest) {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data);
@@ -40,12 +43,28 @@ export class AuthService {
     this.token.set(token);
   }
 
+  // se ejcuta al arrancar la app
+  loadToken() {
+    // intenta leer token guardado
+    const token = localStorage.getItem('token');
+
+    // si existe token
+    if (token) {
+      // actualiza signal
+      this.token.set(token);
+    }
+  }
+
+  // token actual
   getToken() {
     return this.token();
   }
 
   logOut() {
+    // elimina token del navegador
     localStorage.removeItem('token');
+
+    // actualiza signal o null
     this.token.set(null);
   }
 }
