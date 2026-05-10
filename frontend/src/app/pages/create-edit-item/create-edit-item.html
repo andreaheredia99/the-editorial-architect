@@ -1,1 +1,42 @@
-<p>create-edit-item works!</p>
+<h1>Crear item</h1>
+<!-- título -->
+
+<form (ngSubmit)="saveItem()">
+    <!-- cuando enviamos formulario -->
+
+    <div>
+
+        <label>Título</label>
+
+        <!-- valor actual signal, actualiza signal, name ="title" es obligatorio para ngModel-->
+        <input type="text" [ngModel]="title()" 
+
+        (ngModelChange)="title.set($event)"
+
+        name="title">
+
+    </div>
+
+    <br>
+
+    <div>
+
+        <label>Descripción</label>
+
+        <!-- valor actual, actualiza signal, name="description" es obligatorio -->
+        <textarea [ngModel]="description()" 
+
+        (ngModelChange)="description.set($event)"
+      
+
+        name="description"></textarea>
+
+    </div>
+
+    <br>
+
+    <button type="submit">
+        Crear item
+    </button>
+
+</form>

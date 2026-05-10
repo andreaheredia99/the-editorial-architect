@@ -43,3 +43,6 @@ Content-Type: application/json
 
 ### ELIMINAR ITEM
 DELETE http://127.0.0.1:8000/items/4
+
+### OBTENER ITEM POR ID
+GET http://127.0.0.1:8000/items/5

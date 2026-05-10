@@ -1,8 +1,35 @@
-<h2>List of Items</h2>
+<h1>Lista de items</h1>
 
-<!--Recorre los datos y pinta resultados en pantalla-->
-<ul>
-    @for (item of items(); track item.id) {
-    <li>{{ item.title }}</li>
-    }
-</ul>
+<!-- navegación sin recargar página-->
+<button routerLink="/create-item">
+    Crear nuevo item
+</button>
+
+
+
+@for (item of items(); track item.id) {
+
+<div class="item-card">
+
+    <h3>{{ item.title }}</h3>
+
+    <p>{{ item.description }}</p>
+
+    <button (click)="deleteItem(item.id)">
+        Eliminar
+    </button>
+
+    <button [routerLink]="['/edit-item', item.id]">
+        Editar
+    </button>
+
+    <hr>
+
+
+</div>
+
+} @empty {
+
+<p>No hay items todavía</p>
+
+}
