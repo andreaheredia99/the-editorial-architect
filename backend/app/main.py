@@ -8,13 +8,8 @@ from app.routers.items import router as items_router
 
 from app.routers.auth import router as auth_router
 
+# crear app FastAPI
 app = FastAPI()
-
-# conecta auth.py con FastAPI
-app.include_router(auth_router)
-
-# conectamos ruta items
-app.include_router(items_router, prefix="/items", tags=["Items"])
 
 # SQL crea todas las tablas que no existan
 Base.metadata.create_all(bind=engine)
@@ -28,23 +23,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# conecta auth.py con FastAPI
+app.include_router(auth_router)
 
-# Endpoint
-@app.get("/items")
-def get_items():
-    return [{"id": 1, "title": "First article"}, {"id": 2, "title": "Second article"}]
-
-
-# Usuario prueba
-test_user = {"email": "test@gmail.com", "password": "1234"}
-
-
-# LOGIN
-@app.post("/login")
-def login(user: dict):
-    if (
-        user["email"] == test_user["email"]
-        and user["password"] == test_user["password"]
-    ):
-        return {"access_token": "test-jwt-token"}
-    raise HTTPException(status_code=401, detail="Invalid credentials")
+# conectamos ruta items
+app.include_router(items_router, prefix="/items", tags=["Items"])

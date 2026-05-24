@@ -1,5 +1,20 @@
 <nav>
   <!-- <a routerLink="/items">Ver artículos</a> -->
+
+  <!-- Usuario NO autenticado -->
+  @if (!authService.isAuthenticated()){
+    <a routerLink="/login">Login</a>
+    <a routerLink="/register">Register</a>
+  }
+
+  <!-- Usuario autenticado -->
+  @if(authService.isAuthenticated()){
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/profile">Profile</a>
+
+    <button (click)="logOut()">LogOut</button>
+  }
+
 </nav>
 <!--Navegación SPA, aplicación de una sola página, sitio web carga 1 sola vez y actualiza su contenido sin recargar la página-->
 

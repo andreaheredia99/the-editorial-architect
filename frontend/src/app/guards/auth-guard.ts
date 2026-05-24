@@ -3,10 +3,10 @@ import { AuthService } from './../services/auth.service';
 import { CanActivateFn, Router } from '@angular/router';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  // obtenemos AuthService
+  // AuthService para comprobar login
   const authService = inject(AuthService);
 
-  // obtenemos Router
+  // Router para redirigir
   const router = inject(Router);
 
   // usuario autenticado?
@@ -14,10 +14,11 @@ export const authGuard: CanActivateFn = (route, state) => {
     // dejamos pasar
     return true;
   }
+
   // redirige a login
   router.navigate(['/login']);
 
-  //bloquea acceso
+  //bloquea la ruta
   return false;
 
 };

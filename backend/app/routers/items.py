@@ -1,24 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.database import SessionLocal
+from app.database import get_db
 from app.models.item import Item
 from app.schemas.item import ItemCreate, ItemResponse
 
 # rutas
 router = APIRouter()
-
-
-# conexión base datos
-def get_db():
-    # creamos sesión SQL
-    db = SessionLocal()
-    try:
-        # devuelve conexión temporalmente
-        yield db
-    finally:
-        # termina petición, cierra conexión
-        db.close()
 
 
 ### ENDPOINT POST /items, crear item

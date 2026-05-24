@@ -3,7 +3,11 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest, LoginResponse, RegisterResponse } from '../models/auth.model';
+import { LoginRequest } from '../models/login-request.model';
+import { LoginResponse } from '../models/login-response.model';
+import { RegisterResponse } from '../models/register-response.model';
+
+
 
 // Angular puede usar este servicio en toda la app
 @Injectable({
@@ -11,6 +15,7 @@ import { LoginRequest, LoginResponse, RegisterResponse } from '../models/auth.mo
 })
 export class AuthService {
 
+  // URL backend auth
   private apiUrl = environment.apiUrl;
 
   // URL register
@@ -28,14 +33,17 @@ export class AuthService {
     this.loadToken();
    }
   
+  // autenticar
   login(data: LoginRequest) {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data);
   }
 
+  /// crear usuarios
   register(data: LoginRequest) {
     return this.http.post<RegisterResponse>(this.registerUrl, data);
   }
 
+  // login debe guardar JWT
   saveToken(token: string) {
     // PERSISTENCIA, token siga existiendo
     localStorage.setItem('token', token);

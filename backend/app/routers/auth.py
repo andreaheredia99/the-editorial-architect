@@ -9,9 +9,11 @@ from fastapi import HTTPException
 
 from app.utils.security import hash_password, verify_password
 
+# crea grupo de rutas/endpoints
 router = APIRouter()
 
 
+# ENDPOINT crear usuario
 @router.post("/register")
 def register(user: UserCreate):
     # abre conexión con mysql
@@ -28,6 +30,7 @@ def register(user: UserCreate):
     return {"message": "User create", "email": new_user.email}
 
 
+# ENDPOINT login usuario
 @router.post("/login")
 def login(user: UserLogin):
     db: Session = SessionLocal()

@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -14,5 +15,15 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   // RouterLink = permite navegar
   
 export class App {
+
+  // ejemplo Angular signals 
   protected readonly title = signal('frontend-app');
+
+  // inyectar servicio para acceder a auth global
+  protected authService = inject(AuthService);
+
+  // cerrar sesión
+  logOut() {
+    this.authService.logOut();
+  }
 }
