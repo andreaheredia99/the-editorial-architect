@@ -1,1 +1,28 @@
-<p>detail-item works!</p>
+<p>List item detail</p>
+
+<!-- comprobar si el item ya existe-->
+@if (item()){
+
+<div class="item-card">
+
+    <!-- !, le indicamos a TypeScript que aqui no es null, ya comprobamos antes en item() -->
+    <h3>{{ item()!.title }}</h3>
+
+    <p>{{ item()!.description }}</p>
+
+    <button [routerLink]="['/items']">
+        Return list items
+    </button>
+
+    <button [routerLink]="['/edit-item', item()!.id]">
+        Edit item
+    </button>
+
+    <button (click)="deleteItem()">
+        Delete item
+    </button>
+
+</div>
+
+
+} 

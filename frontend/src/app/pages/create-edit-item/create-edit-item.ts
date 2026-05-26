@@ -15,13 +15,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './create-edit-item.css',
 })
 export class CreateEditItem {
+
   // servicio backend
   private itemService = inject(ItemService);
+
   // router Angular
   private router = inject(Router);
 
   // ActivatedRoute permite leer parámetros de ruta, query params y URL actual
   private route = inject(ActivatedRoute);
+
+
+  title = signal('');
+  description = signal('');
+  
 
   // saber si estamos editando
   isEditMode = false;
@@ -29,9 +36,6 @@ export class CreateEditItem {
   // guardar ID item
   itemId: number | null = null;
 
-
-  title = signal('');
-  description = signal('');
 
   // editar item
   ngOnInit(): void{
@@ -41,7 +45,7 @@ export class CreateEditItem {
     if (id) {
       // activamos modo edición
       this.isEditMode = true;
-      // guardamos id convertido a número, URL devuelve string
+      // guardamos id convertido a número, URL siempre devuelve string
       this.itemId = Number(id);
       // obtenemos datos item del backend
       this.itemService.getItemById(this.itemId).subscribe({
@@ -60,6 +64,7 @@ export class CreateEditItem {
     }
   }
 
+  // enviar formulario al backend
   saveItem() {
     // datos formulario
     const itemData = {

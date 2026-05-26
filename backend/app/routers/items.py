@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.models.item import Item
+from app.models.item import Item, User
 from app.schemas.item import ItemCreate, ItemResponse
+from app.utils.security import get_current_user
 
 # rutas
 router = APIRouter()
@@ -12,13 +13,18 @@ router = APIRouter()
 ### ENDPOINT POST /items, crear item
 @router.post("/", response_model=ItemResponse)  # respuesta automática
 # datos que llegan del frontend
-def create_item(item: ItemCreate, db: Session = Depends(get_db)):
+def create_item(
+    item: ItemCreate,
+    db: Session = Depends(get_db),
+    # usuario autenticado actual
+    current_user: User = Depends(get_current_user),
+):
     # creamos objeto item
     new_item = Item(
         title=item.title,
         description=item.description,
         # usuario propietario
-        owner_id=4,
+        owner_id=current_user.id,
     )
     # añadimos objeto a la sesión
     db.add(new_item)
@@ -61,12 +67,20 @@ def update_item(
     item_id: int,  # id de la URL
     updated_item: ItemCreate,  # nuevos datos enviados
     db: Session = Depends(get_db),  # conexión a base datos
+    # usuario autenticado actual
+    current_user: User = Depends(get_current_user),
 ):
     # busca item en la base datos
     item = db.query(Item).filter(Item.id == item_id).first()
 
+    # si no hay item
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
+
+    # comparar usuario propietario con usuario autenticado
+    if item.owner_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Not authorized")
+
     # actualiza
     item.title = updated_item.title
     item.description = updated_item.description
@@ -80,12 +94,21 @@ def update_item(
 def delete_item(
     item_id: int,  # id de la URL
     db: Session = Depends(get_db),  # conexión a la base de datos
+    # usuario autenticado actual
+    current_user: User = Depends(get_current_user),
 ):
     # busca item en la bd
     item = db.query(Item).filter(Item.id == item_id).first()
 
+    # si no hay item
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
+
+    # comparar usuario propietario con usuario autenticado
+    if item.owner_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Not authorized")
+
+    # elimina
     db.delete(item)  # selecciona item a eliminar
     db.commit()  # delete
     return {"message": "Item deleted successfully"}

@@ -14,16 +14,17 @@ import { RouterLink } from "@angular/router";
 })
 export class ListItems implements OnInit{
 
-  // inyectamos el servicio
+  // inyectamos el servicio, acceso backend CRUD
   private itemService = inject(ItemService);
 
+  // estado reactivo, cuando items cambia Angular actualiza automáticamente, array items
   items = signal<Item[]> ([]);
   
-  // pedimos datos al service y los guardamos en items
+  // pedimos datos al service y los guardamos en items (carga items al entrar a la página)
   ngOnInit(): void {
-    // petición al backend
+    // petición al backend, llama API FastaAPI y espera respuesta Observable
     this.itemService.getItems().subscribe({
-      // si va bien, array de items
+      // si responde bien, array de items
       next: (data: Item[]) => {
         // guardamos item
         this.items.set(data);
@@ -36,14 +37,15 @@ export class ListItems implements OnInit{
     });
   }
 
+  // eliminar item concreto
   deleteItem(id: number) {
     // llamada delete al backend
     this.itemService.deleteItem(id).subscribe({
-      // si va bien
+      // si responde bien
       next: () => {
-        console.log('Item eleiminado');
-        // actualizar lista items, crea nuevo array
-        this.items.update(items => items.filter(item => item.id! == id));
+        console.log('Item eliminado');
+        // actualizar lista items, crea nuevo array sin el item eliminado
+        this.items.update(items => items.filter(item => item.id! !== id));
       },
       // si hay error
       error: (error: any) => {

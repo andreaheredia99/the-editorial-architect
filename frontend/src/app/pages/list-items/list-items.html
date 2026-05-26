@@ -1,12 +1,12 @@
-<h1>Lista de items</h1>
+<h1>List items</h1>
 
 <!-- navegación sin recargar página-->
 <button routerLink="/create-item">
-    Crear nuevo item
+    Create new item
 </button>
 
 
-
+<!-- Renderizar los items reales en pantalla -->
 @for (item of items(); track item.id) {
 
 <div class="item-card">
@@ -15,21 +15,22 @@
 
     <p>{{ item.description }}</p>
 
-    <button (click)="deleteItem(item.id)">
-        Eliminar
+    <button [routerLink]="['/detail-item', item.id]">
+        See detail item
     </button>
 
     <button [routerLink]="['/edit-item', item.id]">
-        Editar
+        Edit item
     </button>
 
-    <hr>
-
+    <button (click)="deleteItem(item.id)">
+        Delete item
+    </button>
 
 </div>
 
 } @empty {
 
-<p>No hay items todavía</p>
+<p>There are no items yet</p>
 
 }
