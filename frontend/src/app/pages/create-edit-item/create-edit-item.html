@@ -4,14 +4,14 @@
 <form (ngSubmit)="saveItem()">
     <!-- cuando enviamos formulario, click = saveItem() -->
 
-    <div>
+    <div class="card">
 
         <label>Título</label>
 
         <!-- mostrar valor actual signal, actualiza signal, name ="title" es obligatorio para ngModel
          (ngModelChange), actualiza signal cuando usuario escribe
          ($event), nuevo valor escrito-->
-        <input type="text" [ngModel]="title()" 
+        <input class="input" type="text" [ngModel]="title()" 
 
     
         (ngModelChange)="title.set($event)"
@@ -22,12 +22,12 @@
 
     <br>
 
-    <div>
+    <div class="card">
 
         <label>Descripción</label>
 
         <!-- valor actual, actualiza signal, name="description" es obligatorio ... -->
-        <textarea [ngModel]="description()" 
+        <textarea class="input" [ngModel]="description()" 
 
         (ngModelChange)="description.set($event)"
       
@@ -38,7 +38,7 @@
 
     <br>
 
-    <button type="submit">
+    <button type="submit" class="btn-primary">
         Create - Edit item
     </button>
 

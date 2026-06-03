@@ -5,10 +5,10 @@ from jose import JWTError, jwt
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
+from datetime import datetime, timedelta
 
-from database import get_db
-from models.user import User
-from utils.security import decode_token
+from app.database import get_db
+from app.models.user import User
 
 # JWTError, captura tokens inválidos
 # jwt, crear y leer tokens
@@ -50,6 +50,9 @@ def create_access_token(data: dict):
 
     # fecha expiración token
     expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+
+    # para que caduque el token
+    to_encode.update({"exp": expire})
 
     # crea JWT firmado
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)

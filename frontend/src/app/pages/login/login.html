@@ -1,28 +1,39 @@
-<h2>Login</h2>
+<div class="login-container">
+<!-- centra login en pantalla, contenedor exterior -->
 
-<input type="email" placeholder="Email" (input)="onEmailInput($event)" />
+    <div class="card login-card">
 
-<input type="password" placeholder="Password" (input)="onPasswordInput($event)" />
+        <h2>Welcome Back</h2>
 
-<button 
-(click)="onLogin()"
-[disabled]="loading()"
-> <!-- deshabilita botón si loading = true -->
-    @if(loading()){
-        Loading...
-    } @else {
-        Login
-    }
-</button>
+        <p class="subtitle">Sign in to continue</p>
 
-<p>
-    Don´t have an account?
-    <a routerLink="/register">
-        Register
-    </a>
-</p>
+        <input class="input" type="email" placeholder="Email" (input)="onEmailInput($event)" />
 
-@if (error()) {
-<p style="color:red;">{{ error() }}</p>
+        <input class="input" type="password" placeholder="Password" (input)="onPasswordInput($event)" />
 
-}
+        <button class="btn-primary"
+        (click)="onLogin()"
+        [disabled]="loading()"> 
+        <!-- deshabilita botón si loading = true -->
+            @if(loading()){
+                Loading...
+            } @else {
+                Login
+            }
+        </button>
+
+        <p>
+            Don´t have an account?
+            <a routerLink="/register">
+                Register
+            </a>
+        </p>
+
+        @if (error()) {
+        <p class="error-message">
+            {{ error() }}
+        </p>
+
+        }
+    </div>
+</div>
