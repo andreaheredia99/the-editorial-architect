@@ -1,45 +1,67 @@
-<h1>Create - Edit item</h1>
-<!-- título -->
+<div class="auth-container">
 
-<form (ngSubmit)="saveItem()">
-    <!-- cuando enviamos formulario, click = saveItem() -->
+    <div class="card auth-card">
 
-    <div class="card">
+        <h2 class="auth-title">
 
-        <label>Título</label>
+            @if(isEditMode) {
+            Edit Item
+            } @else {
+            Create Item
+            }
 
-        <!-- mostrar valor actual signal, actualiza signal, name ="title" es obligatorio para ngModel
-         (ngModelChange), actualiza signal cuando usuario escribe
-         ($event), nuevo valor escrito-->
-        <input class="input" type="text" [ngModel]="title()" 
+        </h2>
 
-    
-        (ngModelChange)="title.set($event)"
-        
-        name="title">
+        <p class="auth-subtitle">
+
+            @if(isEditMode) {
+            Update your item information
+            } @else {
+            Add a new item
+            }
+
+        </p>
+
+        <form (ngSubmit)="saveItem()">  <!-- cuando enviamos formulario, click = saveItem() -->
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Title
+                </label>
+
+                <!-- mostrar valor actual signal, actualiza signal, name ="title" es obligatorio para ngModel
+                (ngModelChange), actualiza signal cuando usuario escribe
+                ($event), nuevo valor escrito-->
+                <input class="input" type="text" [ngModel]="title()" (ngModelChange)="title.set($event)" name="title">
+
+            </div>
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    Description
+                </label>
+
+                <!-- valor actual, actualiza signal, name="description" es obligatorio ... -->
+                <textarea class="input" [ngModel]="description()" (ngModelChange)="description.set($event)"
+                    name="description">
+                </textarea>
+
+            </div>
+
+            <button type="submit" class="btn-primary">
+
+                @if(isEditMode) {
+                Update Item
+                } @else {
+                Create Item
+                }
+
+            </button>
+
+        </form>
 
     </div>
 
-    <br>
-
-    <div class="card">
-
-        <label>Descripción</label>
-
-        <!-- valor actual, actualiza signal, name="description" es obligatorio ... -->
-        <textarea class="input" [ngModel]="description()" 
-
-        (ngModelChange)="description.set($event)"
-      
-
-        name="description"></textarea>
-
-    </div>
-
-    <br>
-
-    <button type="submit" class="btn-primary">
-        Create - Edit item
-    </button>
-
-</form>
+</div>

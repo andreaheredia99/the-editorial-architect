@@ -1,28 +1,33 @@
-<p>List item detail</p>
-
 <!-- comprobar si el item ya existe-->
 @if (item()){
 
-<div class="item-card">
+<div class="auth-container">
+    
+    <div class="card detail-card">
 
-    <!-- !, le indicamos a TypeScript que aqui no es null, ya comprobamos antes en item() -->
-    <h3>{{ item()!.title }}</h3>
+        <!-- !, le indicamos a TypeScript que aqui no es null, ya comprobamos antes en item() -->
+        <h2 class="auth-title">{{ item()!.title }}</h2>
 
-    <p>{{ item()!.description }}</p>
+        <p class="detail-description">{{ item()!.description }}</p>
 
-    <button [routerLink]="['/items']">
-        Return list items
-    </button>
+        <div class="detail-actions">
 
-    <button [routerLink]="['/edit-item', item()!.id]">
-        Edit item
-    </button>
+            <button class="btn-primary" [routerLink]="['/items']">
+                Return to Items
+            </button>
 
-    <button (click)="deleteItem()">
-        Delete item
-    </button>
+            <button  class="btn-primary" [routerLink]="['/edit-item', item()!.id]">
+                Edit Item
+            </button>
+
+            <button class="btn-primary" (click)="deleteItem()">
+                Delete Item
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
-
 
 } 

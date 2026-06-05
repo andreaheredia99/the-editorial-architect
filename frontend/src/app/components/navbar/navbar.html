@@ -1,1 +1,40 @@
-<p>navbar works!</p>
+<nav class="navbar">
+
+    <a routerLink="/items" class="navbar-logo">
+        The Editorial Architect
+    </a>
+
+    <div class="navbar-links">
+
+        <!-- Usuario NO autenticado -->
+        @if (!authService.isAuthenticated()){
+        <!-- RouterLinkActivate, si la ruta actual coincide con este enlace, añade una clase css -->
+        <a routerLink="/login" routerLinkActive="active-link">Login</a>
+        <a routerLink="/register" routerLinkActive="active-link">Register</a>
+        }
+        
+        <!-- Usuario autenticado -->
+        @if(authService.isAuthenticated()){
+        <a routerLink="/dashboard" routerLinkActive="active-link">Dashboard</a>
+        <a routerLink="/items" routerLinkActive="active-link">Posts</a>
+        <a routerLink="/create-item" routerLinkActive="active-link">Create Item</a>
+        }
+    </div>
+
+    <!-- Acciones de usuario -->
+    @if(authService.isAuthenticated()){
+
+        <div class="navbar-actions">
+            <div class="navbar-avatar" (click)="toggleMenu()">A</div>
+        </div>
+
+        @if(menuOpen()){
+            <div class="dropdown-menu">
+                <a routerLink="/profile" (click)="closeMenu()">Profile</a>
+                <button (click)="logOut()">LogOut</button>
+            </div>
+        }
+    }
+    
+        
+</nav>

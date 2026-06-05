@@ -1,35 +1,53 @@
-<h1>Register</h1>
+<div class="auth-container">
+        
+    <div class="auth-logo">
+        The Editorial Architect
+    </div>
+    
+    <div class="card auth-card">
+        
+        <h1 class="auth-title">Create Account</h1>
 
-<input type="email" placeholder="Email" (input)="onEmailInput($event)">
+        <p class="auth-subtitle">Join the community</p>
 
-<input type="password" placeholder="Password" (input)="onPasswordInput($event)">
+        <div class="form-group">
 
-<button 
-(click)="onRegister()"
-[disabled]="loading()"
->
-    @if(loading()) {
-        Loading...
-    } @else{
-        Register
-    }
-</button>
+            <label class="form-label">EMAIL ADDRESS</label>
+            <input class="input" type="email" placeholder="Email" (input)="onEmailInput($event)">
 
-<p>
-    Already have an account?
-    <a routerLink="/login">
-        Login
-    </a>
-</p>
+            <label class="form-label">PASSWORD</label>
+            <input class="input" type="password" placeholder="Password" (input)="onPasswordInput($event)">
+            
+        </div>
+        <button class="btn-primary" 
+        (click)="onRegister()"
+        [disabled]="loading()"
+        >
+            @if(loading()) {
+                Loading...
+            } @else{
+                Register
+            }
+        </button>
 
-@if(error()) {
-<p>
-    {{ error() }}
-</p>
-}
+        <p class="form-footer">
+            Already have an account?
+            <a routerLink="/login">
+                Login
+            </a>
+        </p>
 
-@if(success()) {
-<p>
-    {{ success() }}
-</p>
-}
+        @if(error()) {
+        <p class="error-message">
+            {{ error() }}
+        </p>
+        }
+
+        @if(success()) {
+        <p class="success-message">
+            {{ success() }}
+        </p>
+        }
+
+    </div>
+</div>

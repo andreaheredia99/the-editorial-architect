@@ -1,15 +1,25 @@
-<div class="login-container">
+<div class="auth-container">
 <!-- centra login en pantalla, contenedor exterior -->
 
-    <div class="card login-card">
+    <div class="auth-logo">
+        The Editorial Architect
+    </div>
 
-        <h2>Welcome Back</h2>
+    <div class="card auth-card">
 
-        <p class="subtitle">Sign in to continue</p>
+        <h2 class="auth-title">Welcome Back</h2>
 
-        <input class="input" type="email" placeholder="Email" (input)="onEmailInput($event)" />
+        <p class="auth-subtitle">Sign in to continue</p>
 
-        <input class="input" type="password" placeholder="Password" (input)="onPasswordInput($event)" />
+        <div class="form-group">
+
+            <label class="form-label">EMAIL ADDRESS</label>
+            <input class="input" type="email" placeholder="editor@architect.com" (input)="onEmailInput($event)" />
+
+            <label class="form-label">PASSWORD</label>
+            <input class="input" type="password" placeholder="Enter your password" (input)="onPasswordInput($event)" />
+
+        </div>
 
         <button class="btn-primary"
         (click)="onLogin()"
@@ -22,7 +32,7 @@
             }
         </button>
 
-        <p>
+        <p class="form-footer">
             Don´t have an account?
             <a routerLink="/register">
                 Register

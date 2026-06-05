@@ -1,0 +1,101 @@
+.navbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* crea 3 columnas, primera ocupa solo lo que necesita, segunda ocupa todo el espacio restante y tercera ocupa solo lo que necesita */
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky; /* fija arriba */
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-logo {
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.03em; /* espacio entre letras */
+    transition: color 0.2s ease;
+    &:hover {
+        color: var(--primary);
+    }
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+
+    a {
+        color: var(--text-secondary);
+        font-weight: 500;
+        transition: color 0.2s ease;
+
+        &:hover{
+            color: var(--primary);
+        }
+
+        &.active-link {
+            color: var(--primary);
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary); /* linea debajo de texto */
+            padding-bottom: 0.5rem; /* separación texto - linea */
+        }
+    }
+}
+
+.navbar-actions {
+    position: relative; /* dropdown relativo al avatar */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-avatar {
+    width: 40px;  /* width y height crea un cuadrado */
+    height: 40px;
+    display: flex; /* centra la letra */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* convierte cuadrado en círculo */
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    &:hover{
+        transform: scale(1.05);
+    }
+}
+
+.dropdown-menu {
+    position: absolute; /* dropdown debajo del avatar */
+    top: 60px; /* justo debajo del avatar */
+    right: 0; /* alineado al borde derecho */
+    min-width: 160px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    z-index: 1000;
+    a, button {
+        background: none;
+        border: none;
+        text-align: left;
+        padding: 0.75rem;
+        border-radius: 8px;
+        cursor: pointer;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 0.95rem;
+        &:hover {
+            background: var(--background);
+        }
+    }
+}

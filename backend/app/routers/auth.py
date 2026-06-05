@@ -7,7 +7,7 @@ from app.schemas.user_schema import UserCreate, UserLogin
 
 from fastapi import HTTPException
 
-from app.utils.security import hash_password, verify_password
+from app.utils.security import hash_password, verify_password, create_access_token
 
 # crea grupo de rutas/endpoints
 router = APIRouter()
@@ -46,4 +46,7 @@ def login(user: UserLogin):
     if not verify_password(user.password, existing_user.password):
         raise HTTPException(status_code=401, detail="Invalid password")
 
-    return {"access_token": "fake-jwt-token"}
+    # usuario existe, contraseña correcta
+    access_token = create_access_token(data={"sub": existing_user.email})
+
+    return {"access_token": access_token, "token_type": "bearer"}

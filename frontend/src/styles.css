@@ -1,5 +1,5 @@
 /* :root, HTML DE TODA LA APP, VARIABLES REUTILIZABLES -- */
-:root{
+:root {
     --primary: #2563eb;
     --background: #f5f7fa;
     --surface: #f5f7fa; /* color de cards */
@@ -10,14 +10,14 @@
 }
 
 /* *, SE APLICA A TODOS LOS ELEMENTOS */
-*{
+* {
     margin:0; /* espacio fuera del borde */
     padding:0; /* espacio dentro del borde */
     box-sizing: border-box; /* tamaño max fijo establecido */
 }
 
 /* BODY */
-body{
+body {
     font-family: Inter, sans-serif;
     background: var(--background);
     color: var(--text-primary);
@@ -25,32 +25,33 @@ body{
 }
 
 /* COMPONENTES VISUALES REUTILIZABLES */
-.btn-primary{
+.btn-primary {
     background: var(--primary);
     color:white; /* texto */
     border: none; /* quitamos borde por defecto */
-    padding: 12px 20px; /* primer valor arriba abajo y segundo valor izq dcha*/
+    padding: 18px 20px; /* primer valor arriba abajo y segundo valor izq dcha*/
     border-radius: var(--radius);
     cursor: pointer; /* ratón mano */
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600; /* grosor letra */
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
     transition: all 0.2s ease; /* propiedades, duración, aceleración*/
     &:hover { /* cuando ratón pasa por encima cambia */
         opacity: 0.9;
     }
 }
 
-.card{
+.card {
     background: var(--surface);
     border-radius: 16px;
-    padding: 24px;
+    padding: 32px;
     border: 1px solid var(--border-color); /* grosor, estilo y color */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* horizontal, sombra, difuminar, color */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* horizontal, sombra, difuminar, color */
 }
 
-.input{
+.input {
     width: 100%; /* todo el ancho posible */
-    padding: 12px 16px;
+    padding: 18px 20px;
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
     background: #f8fafc;
@@ -63,8 +64,86 @@ body{
 }
 
 /* ANCHURA MAX PÁGINA */
-.container{
+.container {
     max-width: 1200px; /* ancho max */
     margin: 0 auto; /* centra contenido */
     padding: 24px; /* espacio en laterales */
 }
+
+/* CLASES Y LINKS GLOBALES */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.auth-card {
+    background-color: white;
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.auth-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.auth-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.auth-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+}
+
+.success-message {
+    color: green;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* COMPONENTE FORMULARIO REUTILIZABLE */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label{
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+.form-footer {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    a {
+        margin-left: 4px;
+    }
+}
+

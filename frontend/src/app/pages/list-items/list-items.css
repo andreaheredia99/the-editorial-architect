@@ -1,0 +1,30 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    /* ajusta las cards en pantalla según tamaño */
+    gap: 24px;
+}
+
+.item-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.item-description {
+    color: var(--test-secondary);
+    line-height: 1.6;
+}
+
+.item-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+}

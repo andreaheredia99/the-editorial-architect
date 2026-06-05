@@ -1,0 +1,15 @@
+.detail-card {
+    max-width: 700px;
+}
+
+.detail-description {
+    margin-top: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;  /* interlineado */
+}
+
+.detail-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}

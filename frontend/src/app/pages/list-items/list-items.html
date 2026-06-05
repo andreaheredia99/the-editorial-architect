@@ -1,36 +1,51 @@
-<h1>List items</h1>
+<div class="container">
 
-<!-- navegación sin recargar página-->
-<button routerLink="/create-item">
-    Create new item
-</button>
+    <div class="page-header">
 
+        <h1>Items</h1>
 
-<!-- Renderizar los items reales en pantalla -->
-@for (item of items(); track item.id) {
+        <!-- navegación sin recargar página-->
+        <button routerLink="/create-item">
+            Create New Item
+        </button>
 
-<div class="item-card">
+    </div>
 
-    <h3>{{ item.title }}</h3>
+    <div class="items-grid">
 
-    <p>{{ item.description }}</p>
+        <!-- Renderizar los items reales en pantalla -->
+        @for (item of items(); track item.id) {
 
-    <button [routerLink]="['/detail-item', item.id]">
-        See detail item
-    </button>
+        <div class="card item-card">
 
-    <button [routerLink]="['/edit-item', item.id]">
-        Edit item
-    </button>
+            <h3>{{ item.title }}</h3>
 
-    <button (click)="deleteItem(item.id)">
-        Delete item
-    </button>
+            <p class="item-description">{{ item.description }}</p>
+
+            <div class="item-actions">
+
+                <button class="btn-primary" [routerLink]="['/detail-item', item.id]">
+                    See detail item
+                </button>
+
+                <button class="btn-primary" [routerLink]="['/edit-item', item.id]">
+                    Edit item
+                </button>
+
+                <button class="btn-primary" (click)="deleteItem(item.id)">
+                    Delete item
+                </button>
+            
+            </div>
+
+        </div>
+
+        } @empty {
+
+        <p>There are no items yet</p>
+
+        }
+
+    </div>
 
 </div>
-
-} @empty {
-
-<p>There are no items yet</p>
-
-}
