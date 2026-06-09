@@ -1,1 +1,12 @@
-<p>toast works!</p>
+<!-- si visible (true) muestra mensaje, si visible (false) no muestra nada -->
+@if(toastService.visible()){
+
+<div class="toast"
+    [class.toast-success]="toastService.type() === 'success'"
+    [class.toast-error]="toastService.type() === 'error'">
+
+    {{ toastService.message() }}
+
+</div>
+
+}

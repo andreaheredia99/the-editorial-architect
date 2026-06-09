@@ -33,7 +33,12 @@
                 <!-- mostrar valor actual signal, actualiza signal, name ="title" es obligatorio para ngModel
                 (ngModelChange), actualiza signal cuando usuario escribe
                 ($event), nuevo valor escrito-->
-                <input class="input" type="text" [ngModel]="title()" (ngModelChange)="title.set($event)" name="title">
+                <!-- activamos titleTouched -->
+                <input class="input" type="text" placeholder="Enter article title" [ngModel]="title()" (ngModelChange)="title.set($event); titleTouched.set(true)" name="title">
+                <!-- mostramos error title -->
+                @if(titleTouched() && titleError()){
+                    <p class="error-message">{{ titleError() }}</p>
+                }
 
             </div>
 
@@ -44,19 +49,34 @@
                 </label>
 
                 <!-- valor actual, actualiza signal, name="description" es obligatorio ... -->
-                <textarea class="input" [ngModel]="description()" (ngModelChange)="description.set($event)"
-                    name="description">
+                <textarea class="input" placeholder="Write a short description of your article" [ngModel]="description()" (ngModelChange)="description.set($event); descriptionTouched.set(true)" name="description">
                 </textarea>
+                @if(descriptionTouched() && descriptionError()){
+                <p class="error-message">{{ descriptionError() }}</p>
+                }
+                <!-- contador caracteres -->
+                <p class="character-count">{{ description().length }} / 500</p>
+                
 
             </div>
 
-            <button type="submit" class="btn-primary">
+            <!-- deshabilitar botón si el formualrio no es válido -->
+            <button type="submit" class="btn-primary" [disabled]="loading() || !isFormValid()">
 
-                @if(isEditMode) {
-                Update Item
+                @if(loading()){
+                    @if(isEditMode) {
+                        Updating...
+                    } @else {
+                        Creating...
+                    }
                 } @else {
-                Create Item
+                    @if(isEditMode) {
+                        Update Item
+                    } @else {
+                        Create Item
+                    }
                 }
+                
 
             </button>
 

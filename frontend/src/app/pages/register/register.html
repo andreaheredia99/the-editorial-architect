@@ -13,18 +13,27 @@
         <div class="form-group">
 
             <label class="form-label">EMAIL ADDRESS</label>
-            <input class="input" type="email" placeholder="Email" (input)="onEmailInput($event)">
+            <input class="input" type="email" placeholder="editor@architect.com" (input)="onEmailInput($event)">
+            @if(emailTouched() && emailError()){
+            <!-- muestra mensaje de emailError o no muestra nada (no error)-->
+            <p class="error-message">{{ emailError() }}</p>
+            }
 
             <label class="form-label">PASSWORD</label>
-            <input class="input" type="password" placeholder="Password" (input)="onPasswordInput($event)">
+            <input class="input" type="password" placeholder="At least 6 characters" (input)="onPasswordInput($event)">
+            @if(passwordTouched () && passwordError()){
+            <!-- existe error y el ususario tocó el campo? -->
+            <p class="error-message">{{ passwordError() }}</p>
+            }
             
         </div>
         <button class="btn-primary" 
         (click)="onRegister()"
-        [disabled]="loading()"
+        [disabled]="loading() || !isFormValid()"
         >
+        <!-- deshabilita botón si el formulario no es válido -->
             @if(loading()) {
-                Loading...
+                Creating account...
             } @else{
                 Register
             }

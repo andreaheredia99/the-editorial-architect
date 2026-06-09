@@ -2,12 +2,13 @@ import { Component, signal, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { Navbar } from './components/navbar/navbar';
+import { Toast } from './components/toast/toast';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, Navbar],
+  imports: [RouterOutlet, RouterLink, Navbar, Toast],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

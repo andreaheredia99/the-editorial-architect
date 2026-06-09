@@ -2,6 +2,7 @@ import { Item } from './../../models/item.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ItemService } from '../../services/item.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-detail-item',
@@ -19,6 +20,9 @@ export class DetailItem implements OnInit {
 
   // inyectar router Angular
   private router = inject(Router);
+
+  // inyectamos toast Service
+  private toastService = inject(ToastService);
 
   // estado reactivo Item, un solo item
   item = signal<Item | null>(null);
@@ -40,7 +44,9 @@ export class DetailItem implements OnInit {
           console.log(data);
         },
         // si hay error
-        error: (error: any) => {
+      error: (error: any) => {
+          // mensaje toast
+        this.toastService.show('Failed to load items', 'error');
           console.error(error);
       }
     
@@ -63,11 +69,16 @@ export class DetailItem implements OnInit {
       next: () => {
         console.log('Item delete');
 
+        // mensaje toast
+        this.toastService.show('Item deleted succesfully', 'success');
+
         // volvemos lista items
         this.router.navigate(['/items']);
       },
       // si hay error
       error: (error: any) => {
+        // mensaje toast
+        this.toastService.show('Failed to delete item', 'error');
         console.error(error);
       }
     });
