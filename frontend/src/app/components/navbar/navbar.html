@@ -1,7 +1,9 @@
 <nav class="navbar">
 
     <a routerLink="/items" class="navbar-logo">
-        The Editorial Architect
+        <span>The</span>
+        <span>Editorial</span>
+        <span>Architect</span>  
     </a>
 
     <div class="navbar-links">
@@ -17,7 +19,7 @@
         @if(authService.isAuthenticated()){
         <a routerLink="/dashboard" routerLinkActive="active-link">Dashboard</a>
         <a routerLink="/items" routerLinkActive="active-link">Posts</a>
-        <a routerLink="/create-item" routerLinkActive="active-link">Create Item</a>
+        <a routerLink="/create-item" routerLinkActive="active-link">Create</a>
         }
     </div>
 

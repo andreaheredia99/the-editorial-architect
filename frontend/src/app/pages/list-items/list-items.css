@@ -28,3 +28,24 @@
     gap: 12px;
     margin-top: auto;
 }
+
+.empty-state {
+    text-align:center;
+    padding: 4rem 2rem;
+    h3{
+        margin-bottom: 0.75rem;
+    }
+    p {
+        margin-bottom: 1.5rem;
+        color: var(--test-secondary);
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .btn-primary {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}

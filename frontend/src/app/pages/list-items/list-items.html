@@ -5,7 +5,7 @@
         <h1>Items</h1>
 
         <!-- navegación sin recargar página-->
-        <button routerLink="/create-item">
+        <button class="btn-primary" routerLink="/create-item">
             Create New Item
         </button>
 
@@ -25,15 +25,15 @@
             <div class="item-actions">
 
                 <button class="btn-primary" [routerLink]="['/detail-item', item.id]">
-                    See detail item
+                    Details
                 </button>
 
                 <button class="btn-primary" [routerLink]="['/edit-item', item.id]">
-                    Edit item
+                    Edit
                 </button>
 
                 <button class="btn-primary" (click)="deleteItem(item.id)">
-                    Delete item
+                    Delete
                 </button>
             
             </div>
@@ -42,7 +42,11 @@
 
         } @empty {
 
-        <p>There are no items yet</p>
+        <div class="empty-state">
+            <h3>No articles yet</h3>
+            <p>Create your first article to get started</p>
+            <button class="btn-primary" routerLink="/create-item">Create New Item</button>
+        </div>
 
         }
 

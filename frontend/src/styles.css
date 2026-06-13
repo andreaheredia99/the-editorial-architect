@@ -37,7 +37,11 @@ body {
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
     transition: all 0.2s ease; /* propiedades, duración, aceleración*/
     &:hover { /* cuando ratón pasa por encima cambia */
-        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
     }
 }
 
@@ -47,6 +51,10 @@ body {
     padding: 32px;
     border: 1px solid var(--border-color); /* grosor, estilo y color */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* horizontal, sombra, difuminar, color */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    &:hover {
+        transform: translateY(-4px); 
+    }
 }
 
 .input {
@@ -57,7 +65,9 @@ body {
     background: #f8fafc;
     font-size: 14px;
     outline: none; /* borde predetermiando del navegador */
+    transition: all 0.2s ease;
     &:focus { /* cuando haces click dentro del input cambia */
+        outline: none;
         border-color: var(--primary);
         box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
     }
@@ -147,3 +157,9 @@ a {
     }
 }
 
+@media (max-width: 1024px) {
+    .auth-container {
+        min-height: auto;
+        padding-top: 3rem;
+    }
+}
