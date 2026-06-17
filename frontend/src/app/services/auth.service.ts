@@ -1,3 +1,4 @@
+import { inject } from '@angular/core';
 //servicios para conectar con fastapi
 
 import { computed, Injectable, signal } from '@angular/core';
@@ -22,16 +23,19 @@ export class AuthService {
   private registerUrl = `${environment.apiUrl}/register`;
 
   // empieza en null hasta cargar localStorage
-  private token = signal<string | null>(null);
+  private token = signal<string | null>(localStorage.getItem('token'));
+
+  // signal para role, lee localStorage directamente
+  private role = signal<string | null>(localStorage.getItem('role'));
+
+  // signal para UserId, number convierte porque localStorgae siempre guarda texto
+  private userId = signal<number | null>(Number(localStorage.getItem('userId')));
 
   // convierte token existente (true) o null (false)
   isAuthenticated = computed(() => !!this.token());
 
   // para hacer peticiones http
-  constructor(private http: HttpClient) {
-    // servicio se crea, intenta recuperar token guardado
-    this.loadToken();
-   }
+  private http = inject (HttpClient);
   
   // autenticar
   login(data: LoginRequest) {
@@ -51,16 +55,17 @@ export class AuthService {
     this.token.set(token);
   }
 
-  // se ejcuta al arrancar la app
-  loadToken() {
-    // intenta leer token guardado
-    const token = localStorage.getItem('token');
+  // login guarda role
+  saveRole(role: string) {
+    localStorage.setItem('role', role);
+    this.role.set(role);
+  }
 
-    // si existe token
-    if (token) {
-      // actualiza signal
-      this.token.set(token);
-    }
+  // login guarda userId
+  saveUserId(userId: number) {
+    // toString() porque localStorage solo almacena string
+    localStorage.setItem('userId', userId.toString());
+    this.userId.set(userId);
   }
 
   // token actual
@@ -68,11 +73,33 @@ export class AuthService {
     return this.token();
   }
 
+  // role actual
+  getRole() {
+    return this.role();
+  }
+
+  // userId actual
+  getUserId() {
+    return this.userId();
+  }
+
+  isAdmin() {
+    return this.role() === 'admin';
+  }
+
+  isEditor() {
+    return this.role() === 'editor';
+  }
+
   logOut() {
-    // elimina token del navegador
+    // elimina token y role del navegador
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
 
     // actualiza signal o null
     this.token.set(null);
+    this.role.set(null);
   }
+
+
 }

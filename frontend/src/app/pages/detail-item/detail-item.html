@@ -16,14 +16,17 @@
                 Return to Items
             </button>
 
-            <button  class="btn-primary" [routerLink]="['/edit-item', item()!.id]">
-                Edit Item
-            </button>
+            @if(isOwner()){
+                <button  class="btn-primary" [routerLink]="['/edit-item', item()!.id]">
+                    Edit Item
+                </button>
 
-            <button class="btn-primary" (click)="deleteItem()">
-                Delete Item
-            </button>
+                <button class="btn-primary" (click)="deleteItem()">
+                    Delete Item
+                </button>
 
+            }
+            
         </div>
 
     </div>

@@ -108,8 +108,10 @@ export class Login {
         // termina loading
         this.loading.set(false);
 
-        // guardamos token del usuario
+        // guardamos token, role y userId del usuario
         this.authService.saveToken(response.access_token);
+        this.authService.saveRole(response.role);
+        this.authService.saveUserId(response.user_id);
 
         // mensaje toast
         this.toastService.show('Welcome back!', 'success');

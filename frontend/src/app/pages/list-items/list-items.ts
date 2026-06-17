@@ -4,6 +4,7 @@ import { Item } from '../../models/item.model';
 import { ItemService } from '../../services/item.service';
 import { RouterLink } from "@angular/router";
 import { ToastService } from '../../services/toast.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -20,6 +21,9 @@ export class ListItems implements OnInit{
 
   // inyectamos servicio Toast
   private toastService = inject(ToastService);
+
+  // inyectamos servicio AuthService, donde sabemos quién está logueado
+  private authService = inject(AuthService);
 
   // estado reactivo, cuando items cambia Angular actualiza automáticamente, array items
   items = signal<Item[]> ([]);
@@ -41,6 +45,18 @@ export class ListItems implements OnInit{
         console.error(error);
       }
     });
+  }
+
+  // ¿este item pertenece al usuario actual?
+  isOwner(item: Item) {
+    // si es Admin, tiene permiso, función termina
+    if (this.authService.isAdmin()) {
+      return true;
+    }
+    // obtenemos Id usuario actual
+    const currentUserId = this.authService.getUserId();
+    // compara, return true/false 
+    return item.owner_id === currentUserId;
   }
 
   // eliminar item concreto

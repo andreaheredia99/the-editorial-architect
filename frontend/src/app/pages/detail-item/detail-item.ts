@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ItemService } from '../../services/item.service';
 import { ToastService } from '../../services/toast.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-detail-item',
@@ -23,6 +24,9 @@ export class DetailItem implements OnInit {
 
   // inyectamos toast Service
   private toastService = inject(ToastService);
+
+  // inyectamos servicio authService
+  private authService = inject(AuthService);
 
   // estado reactivo Item, un solo item
   item = signal<Item | null>(null);
@@ -53,6 +57,23 @@ export class DetailItem implements OnInit {
     
     })
     
+  }
+
+  // ¿ es propietario ?
+  isOwner() {
+    // es admin
+    if (this.authService.isAdmin()) {
+      return true;
+    }
+    // item aún no cargado
+    const currentItem = this.item();
+    // item null
+    if (!currentItem) {
+      return false;
+    }
+    // compara owner_id con userId
+    const currentUserId = this.authService.getUserId();
+    return currentItem.owner_id === currentUserId;
   }
 
   deleteItem() {

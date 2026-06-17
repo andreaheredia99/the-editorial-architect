@@ -49,4 +49,6 @@ def login(user: UserLogin):
     # usuario existe, contraseña correcta
     access_token = create_access_token(data={"sub": existing_user.email})
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    # "role" para que angular sepa si es 'admin' o 'editor'
+    # "user_id" para saber que numero de editor es
+    return {"access_token": access_token, "token_type": "bearer", "role": existing_user.role, "user_id": existing_user.id}

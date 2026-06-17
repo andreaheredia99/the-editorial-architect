@@ -11,7 +11,7 @@ from app.routers.auth import router as auth_router
 # crear app FastAPI
 app = FastAPI()
 
-# SQL crea todas las tablas que no existan
+# SQL crea todas las tablas que no existan, NO las modifica
 Base.metadata.create_all(bind=engine)
 
 # CORS (no confia en la conexion, bloquea)

@@ -28,13 +28,15 @@
                     Details
                 </button>
 
-                <button class="btn-primary" [routerLink]="['/edit-item', item.id]">
-                    Edit
-                </button>
+                @if(isOwner(item)){
+                    <button class="btn-primary" [routerLink]="['/edit-item', item.id]">
+                        Edit
+                    </button>
 
-                <button class="btn-primary" (click)="deleteItem(item.id)">
-                    Delete
-                </button>
+                    <button class="btn-primary" (click)="deleteItem(item.id)">
+                        Delete
+                    </button>
+                }
             
             </div>
 
