@@ -1,15 +1,16 @@
 
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Item } from '../../models/item.model';
 import { ItemService } from '../../services/item.service';
 import { RouterLink } from "@angular/router";
 import { ToastService } from '../../services/toast.service';
 import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-list-items',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   standalone: true,
   templateUrl: './list-items.html',
   styleUrl: './list-items.css',
@@ -26,7 +27,14 @@ export class ListItems implements OnInit{
   private authService = inject(AuthService);
 
   // estado reactivo, cuando items cambia Angular actualiza automáticamente, array items
-  items = signal<Item[]> ([]);
+  items = signal<Item[]>([]);
+  
+  // texto que escribe el usuario
+  search = signal('');
+
+  // buscar en items
+  // computed (), signal reactivo que cambia automáticamente
+  filteredItems = computed(() => this.items().filter(item => item.title.toLowerCase().includes(this.search().toLowerCase()) || item.description.toLowerCase().includes(this.search().toLowerCase())));
   
   // pedimos datos al service y los guardamos en items (carga items al entrar a la página)
   ngOnInit(): void {

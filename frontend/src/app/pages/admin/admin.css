@@ -1,0 +1,42 @@
+.stat-card i {
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+    padding: 0.45rem;
+    border-radius: 10px;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.users-icon {
+    color: #3b82f6;
+}
+
+.posts-icon {
+    color: #8b5cf6;
+}
+
+.editors-icon {
+    color: #f59e0b;
+}
+
+.admins-icon {
+    color: #10b981;
+}
+
+.users-card {
+    background: rgba(59, 130, 246, 0.04);
+}
+
+.posts-card {
+    background: rgba(139, 92, 246, 0.04);
+}
+
+.editors-card {
+    background: rgba(245, 158, 11, 0.04);
+}
+
+.admins-card {
+    background: rgba(16, 185, 129, 0.04);
+}

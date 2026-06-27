@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class Profile {
 
+  // inyectamos AuthService
+  authService = inject(AuthService);
+
+  // signal email
+  email = signal(this.authService.getEmail());
+
+  // signal role
+  role = signal(this.authService.getRole());
+
+  // signal userId
+  userId = signal(this.authService.getUserId());
 }

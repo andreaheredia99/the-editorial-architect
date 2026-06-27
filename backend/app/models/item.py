@@ -18,6 +18,9 @@ class Item(Base):
     # descripción opcional
     description = Column(String(1000))
 
+    # categoría del artículo
+    category = Column(String(50), nullable=False)
+
     # id del usuario propietario
     owner_id = Column(Integer, ForeignKey("users.id"))
 

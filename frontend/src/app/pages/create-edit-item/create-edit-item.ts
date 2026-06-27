@@ -33,6 +33,8 @@ export class CreateEditItem {
   title = signal('');
   description = signal('');
   loading = signal(false);
+  // signal categoría por defecto
+  category = signal('Technology');
 
   // estados touched, mostrar errores solo cuando el usuario interactua
   titleTouched = signal(false);
@@ -110,7 +112,7 @@ export class CreateEditItem {
           // rellenamos formulario, actualiza signal
           this.title.set(item.title);
           this.description.set(item.description);
-          console.log(item);
+          this.category.set(item.category);
         },
         error: (error: any) => {
           console.error(error);
@@ -128,6 +130,7 @@ export class CreateEditItem {
     const itemData = {
       title: this.title(),
       description: this.description(),
+      category: this.category(),
     };
     // modo editar
     if (this.isEditMode && this.itemId) {

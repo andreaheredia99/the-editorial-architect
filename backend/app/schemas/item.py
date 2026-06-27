@@ -5,6 +5,7 @@ from pydantic import BaseModel
 class ItemCreate(BaseModel):
     title: str
     description: str
+    category: str
 
 
 # datos que devuelve backend (respuesta backend)
@@ -12,6 +13,7 @@ class ItemResponse(BaseModel):
     id: int
     title: str
     description: str
+    category: str
     owner_id: int
 
     class Config:

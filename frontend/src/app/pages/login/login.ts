@@ -112,6 +112,7 @@ export class Login {
         this.authService.saveToken(response.access_token);
         this.authService.saveRole(response.role);
         this.authService.saveUserId(response.user_id);
+        this.authService.saveEmail(response.email);
 
         // mensaje toast
         this.toastService.show('Welcome back!', 'success');

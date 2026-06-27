@@ -1,1 +1,37 @@
-<p>dashboard works!</p>
+<div class="page-container">
+    <section class="page-hero">
+        <h1>Welcome back, Architect.</h1>
+        <p>Manage your content and editorial workflow from one place.</p>
+    </section>
+
+    <section class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Posts</h3>
+            <p>{{ totalPosts() }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>My Posts</h3>
+            <p>{{ myPosts() }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Role</h3>
+            <p>{{ role() }}</p>
+        </div>
+    </section>
+
+    <section class="recent-posts">
+        <h2>Recent Posts</h2>
+        @for(post of recentPosts(); track post.id){
+            <div class="recent-post-card">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.description }}</p>
+                <a class="view-post-btn" [routerLink]="['/items', post.id]">
+                    View Post
+                </a>
+            </div>
+        }
+    </section>
+
+</div>

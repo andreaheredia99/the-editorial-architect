@@ -11,12 +11,23 @@
 
     </div>
 
+    <div class="search-container">
+    
+        <input class="input" type="text" placeholder="Search articles..." [ngModel]="search()"
+            (ngModelChange)="search.set($event)">
+    
+    </div>
+
     <div class="items-grid">
 
         <!-- Renderizar los items reales en pantalla -->
-        @for (item of items(); track item.id) {
+        @for (item of filteredItems(); track item.id) {
 
         <div class="card item-card">
+
+            <div class="post-image"></div>
+
+            <span class="post-category">{{ item.category }}</span>
 
             <h3>{{ item.title }}</h3>
 

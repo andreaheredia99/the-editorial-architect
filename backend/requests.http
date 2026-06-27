@@ -13,8 +13,8 @@ POST http://127.0.0.1:8000/login
 Content-Type: application/json
 
 {
-    "email": "test@gmail.com",
-    "password": "1234"
+    "email": "admin@test.com",
+    "password": "123456"
 }
 
 ### CREAR ITEM
@@ -46,3 +46,7 @@ DELETE http://127.0.0.1:8000/items/4
 
 ### OBTENER ITEM POR ID
 GET http://127.0.0.1:8000/items/5
+
+### OBTENER USUARIOS
+GET http://127.0.0.1:8000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkB0ZXN0LmNvbSIsImV4cCI6MTc4MjU1NDY4MX0.vaiErrtCv3Zj4Nre8ZI9BNFkF4X_DzL-FhCy0VmtNKI

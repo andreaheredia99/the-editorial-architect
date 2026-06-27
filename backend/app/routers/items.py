@@ -24,6 +24,7 @@ def create_item(
     new_item = Item(
         title=item.title,
         description=item.description,
+        category=item.category,
         # usuario propietario
         owner_id=current_user.id,
     )
@@ -78,13 +79,14 @@ def update_item(
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
 
-    # comparar usuario propietario con usuario autenticado
-    if item.owner_id != current_user.id:
+    # no autorizado cuando NO eres admin Y NO eres propietario
+    if (current_user.role != "admin" and item.owner_id != current_user.id): 
         raise HTTPException(status_code=403, detail="Not authorized")
 
     # actualiza
     item.title = updated_item.title
     item.description = updated_item.description
+    item.category = updated_item.category
     db.commit()  # guarda cambios
     db.refresh(item)  # recarga item actualizado desde base datos
     return item  # devuelve item actualizado
@@ -105,8 +107,8 @@ def delete_item(
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
 
-    # comparar usuario propietario con usuario autenticado
-    if item.owner_id != current_user.id:
+    # no autorizado cuando NO eres admin Y NO eres propietario
+    if current_user.role != "admin" and item.owner_id != current_user.id:
         raise HTTPException(status_code=403, detail="Not authorized")
 
     # elimina

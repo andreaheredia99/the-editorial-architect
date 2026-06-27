@@ -1,13 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 
-from app.database import SessionLocal
+from app.database import SessionLocal, get_db
 from app.models.user import User
-from app.schemas.user_schema import UserCreate, UserLogin
+from app.schemas.user_schema import UserCreate, UserLogin, UserResponse
+from app.utils.security import hash_password, verify_password, create_access_token, get_current_user
 
-from fastapi import HTTPException
-
-from app.utils.security import hash_password, verify_password, create_access_token
 
 # crea grupo de rutas/endpoints
 router = APIRouter()
@@ -51,4 +49,14 @@ def login(user: UserLogin):
 
     # "role" para que angular sepa si es 'admin' o 'editor'
     # "user_id" para saber que numero de editor es
-    return {"access_token": access_token, "token_type": "bearer", "role": existing_user.role, "user_id": existing_user.id}
+    return {"access_token": access_token, "token_type": "bearer", "role": existing_user.role, "user_id": existing_user.id, "email": existing_user.email}
+
+
+# ENDPOINT obtener usuarios
+@router.get("/users", response_model=list[UserResponse])
+def get_users(db: Session = Depends(get_db), current_user: User = Depends(get_current_user),):
+    # solo administradores
+    if current_user.role != "admin":
+        raise HTTPException(status_code=403, detail="Not authorized")
+    users = db.query(User).all()
+    return users

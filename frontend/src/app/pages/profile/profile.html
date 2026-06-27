@@ -1,1 +1,56 @@
-<p>profile works!</p>
+<div class="profile-container">
+
+    <section class="profile-card">
+
+        <div class="profile-avatar">
+            {{ authService.getAvatarLetter() }}
+        </div>
+
+        <h1>{{ email() }}</h1>
+
+        <p>{{ role() }}</p>
+
+    </section>
+
+    <section class="account-card">
+
+        <h2>Account Information</h2>
+
+        <div class="info-row">
+            <span>Email</span>
+            <span>{{ email() }}</span>
+        </div>
+
+        <div class="info-row">
+            <span>Role</span>
+            <span>{{ role() }}</span>
+        </div>
+
+        <div class="info-row">
+            <span>User ID</span>
+            <span>{{ userId() }}</span>
+        </div>
+
+    </section>
+
+    <section class="permissions-card">
+
+        <h2>Permissions</h2>
+
+        @if(role() === 'admin') {
+
+        <p>✓ Create Posts</p>
+        <p>✓ Edit Any Post</p>
+        <p>✓ Delete Any Post</p>
+
+        } @else {
+
+        <p>✓ Create Posts</p>
+        <p>✓ Edit Own Posts</p>
+        <p>✓ Delete Own Posts</p>
+
+        }
+
+    </section>
+
+</div>

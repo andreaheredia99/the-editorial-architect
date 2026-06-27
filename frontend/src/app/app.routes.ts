@@ -7,6 +7,9 @@ import { CreateEditItem } from './pages/create-edit-item/create-edit-item';
 import { DetailItem } from './pages/detail-item/detail-item';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Profile } from './pages/profile/profile';
+import { NotFound } from './pages/not-found/not-found';
+import { Admin } from './pages/admin/admin';
+import { adminGuard } from './guards/admin-guard';
 
 
 export const routes: Routes = [
@@ -28,5 +31,10 @@ export const routes: Routes = [
     
     { path: 'dashboard', component: Dashboard, canActivate: [authGuard] },
     
-    { path: 'profile', component: Profile, canActivate: [authGuard]},
+    { path: 'profile', component: Profile, canActivate: [authGuard] },
+
+    { path: 'admin', component: Admin, canActivate: [adminGuard] },
+    
+    // pagina 404
+    { path: '**', component: NotFound},
 ];

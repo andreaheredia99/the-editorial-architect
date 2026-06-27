@@ -1,0 +1,61 @@
+<div class="page-container">
+
+    <section class="page-hero">
+
+        <h1>Admin Panel</h1>
+
+        <p>
+            Monitor users, content and platform statistics.
+        </p>
+
+    </section>
+
+    <section class="stats-grid">
+
+        <div class="stat-card users-card">
+
+            <h3>
+                <i class="fa-solid fa-users users-icon"></i>
+                Total Users
+            </h3>
+
+            <p>{{ totalUsers() }}</p>
+
+        </div>
+
+        <div class="stat-card posts-card">
+
+            <h3>
+                <i class="fa-solid fa-file-lines posts-icon"></i>
+                Total Posts
+            </h3>
+
+            <p>{{ totalPosts() }}</p>
+
+        </div>
+
+        <div class="stat-card editors-card">
+
+            <h3>
+                <i class="fa-solid fa-pen editors-icon"></i>
+                Editors
+            </h3>
+
+            <p>{{ totalEditors() }}</p>
+
+        </div>
+
+        <div class="stat-card admins-card">
+
+            <h3>
+                <i class="fa-solid fa-shield-halved admins-icon"></i>
+                Admins
+            </h3>
+
+            <p>{{ totalAdmins() }}</p>
+
+        </div>
+
+    </section>
+
+</div>

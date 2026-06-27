@@ -41,7 +41,31 @@
     }
 }
 
+.post-image {
+    height: 180px;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg,
+            var(--primary),
+            var(--text-primary));
+}
 
+.search-container {
+    margin: 2rem 0;
+}
+
+.post-category {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
 
 @media (max-width: 768px) {
     .btn-primary {

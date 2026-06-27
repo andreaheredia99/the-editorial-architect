@@ -56,8 +56,57 @@
                 }
                 <!-- contador caracteres -->
                 <p class="character-count">{{ description().length }} / 500</p>
-                
 
+            </div>
+
+            <div class="form-group">
+            
+                <label class="form-label">
+                    Category
+                </label>
+            
+                <select class="input" [ngModel]="category()" (ngModelChange)="category.set($event)" name="category">
+            
+                    <option value="Technology">
+                        Technology
+                    </option>
+            
+                    <option value="Editorial">
+                        Editorial
+                    </option>
+            
+                    <option value="Design">
+                        Design
+                    </option>
+            
+                    <option value="Workflow">
+                        Workflow
+                    </option>
+            
+                    <option value="Insights">
+                        Insights
+                    </option>
+            
+                </select>
+            
+            </div>
+
+            <div class="image-section">
+            
+                <label class="form-label">
+                    Featured Image
+                </label>
+            
+                <div class="image-placeholder">
+            
+                    <div class="image-icon">
+                        🖼️
+                    </div>
+            
+                    <p>Image upload coming soon</p>
+            
+                </div>
+            
             </div>
 
             <!-- deshabilitar botón si el formualrio no es válido -->
