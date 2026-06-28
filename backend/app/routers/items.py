@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
+import shutil
+import uuid
 
 from app.database import get_db
 from app.models.item import Item
@@ -25,6 +27,7 @@ def create_item(
         title=item.title,
         description=item.description,
         category=item.category,
+        image_url=item.image_url,
         # usuario propietario
         owner_id=current_user.id,
     )
@@ -87,6 +90,7 @@ def update_item(
     item.title = updated_item.title
     item.description = updated_item.description
     item.category = updated_item.category
+    item.image_url = updated_item.image_url
     db.commit()  # guarda cambios
     db.refresh(item)  # recarga item actualizado desde base datos
     return item  # devuelve item actualizado
@@ -115,3 +119,23 @@ def delete_item(
     db.delete(item)  # selecciona item a eliminar
     db.commit()  # delete
     return {"message": "Item deleted successfully"}
+
+
+### ENDPOINT subir imágenes
+@router.post("/upload-image")
+def upload_image(file: UploadFile = File(...)):
+
+    # recibe archivo y genera nombre único, evita sobreescribir archivos
+    filename = f"{uuid.uuid4()}-{file.filename}"
+
+    # ruta fisica, donde se guarda
+    file_path = f"uploads/{filename}"
+
+    # guardar archivo
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    # devolver JSON
+    return {
+        "image_url": f"/uploads/{filename}"
+    }

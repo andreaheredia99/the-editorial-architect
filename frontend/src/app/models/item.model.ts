@@ -6,5 +6,7 @@ export interface Item {
     title: string;
     description: string;
     category: string;
+    // ? puede existir o no, evitamos errores si es null
+    image_url?: string;
     owner_id: number;
 }

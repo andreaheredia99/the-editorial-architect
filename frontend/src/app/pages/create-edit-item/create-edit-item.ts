@@ -35,6 +35,7 @@ export class CreateEditItem {
   loading = signal(false);
   // signal categoría por defecto
   category = signal('Technology');
+  imageUrl = signal('');
 
   // estados touched, mostrar errores solo cuando el usuario interactua
   titleTouched = signal(false);
@@ -113,6 +114,8 @@ export class CreateEditItem {
           this.title.set(item.title);
           this.description.set(item.description);
           this.category.set(item.category);
+          // ??, si la izq es null usa ''
+          this.imageUrl.set(item.image_url ?? '');
         },
         error: (error: any) => {
           console.error(error);
@@ -131,6 +134,7 @@ export class CreateEditItem {
       title: this.title(),
       description: this.description(),
       category: this.category(),
+      image_url: this.imageUrl()
     };
     // modo editar
     if (this.isEditMode && this.itemId) {
@@ -185,6 +189,31 @@ export class CreateEditItem {
         
       });
     }
+  }
+
+  // imagenes
+  onImageSelected(event: Event) {
+    // obtiene el archivo
+    const input = event.target as HTMLInputElement;
+    // si el usuario cancela la selección
+    if (!input.files?.length) {
+      return;
+    }
+    // cogemos primera imagen
+    const file = input.files[0];
+    // llamamos endpoint de uploadImage
+    this.itemService.uploadImage(file).subscribe({
+      next: (response) => {
+        // guardamos imagen
+        this.imageUrl.set(response.image_url);
+        this.toastService.show('Image uploaded successfully', 'success');
+        console.log(response);
+      },
+      error: (error) => {
+        this.toastService.show('Failed to upload image', 'error');
+        console.error(error);
+      }
+    });
   }
 
 }

@@ -18,7 +18,9 @@
         
         </div>
 
-        <div class="article-image"></div>
+        @if(item()?.image_url) {
+        <img [src]="'http://127.0.0.1:8000' + item()?.image_url" class="post-image" alt="Post image">
+        }
 
         <div class="detail-actions">
 

@@ -47,6 +47,15 @@
     text-transform: uppercase;
 }
 
+.post-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    display: block;
+}
+
 @media (max-width: 768px) {
 
     .article-header h1 {

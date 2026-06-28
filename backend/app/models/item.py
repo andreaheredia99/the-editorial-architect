@@ -21,6 +21,9 @@ class Item(Base):
     # categoría del artículo
     category = Column(String(50), nullable=False)
 
+    # imagen ruta db
+    image_url = Column(String(255), nullable=True)
+
     # id del usuario propietario
     owner_id = Column(Integer, ForeignKey("users.id"))
 

@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.database import engine, Base
 from app.models.user import User
@@ -13,6 +14,11 @@ app = FastAPI()
 
 # SQL crea todas las tablas que no existan, NO las modifica
 Base.metadata.create_all(bind=engine)
+
+# monta carpeta estática para abrir directamente desde URL navegador
+app.mount(
+    "/uploads", StaticFiles(directory="uploads"), name="uploads"
+)
 
 # CORS (no confia en la conexion, bloquea)
 app.add_middleware(

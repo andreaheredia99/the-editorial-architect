@@ -25,7 +25,9 @@
 
         <div class="card item-card">
 
-            <div class="post-image"></div>
+            @if(item.image_url) {
+            <img [src]="'http://127.0.0.1:8000' + item.image_url" class="post-image" alt="Post image">
+            }
 
             <span class="post-category">{{ item.category }}</span>
 

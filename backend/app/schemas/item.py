@@ -6,6 +6,7 @@ class ItemCreate(BaseModel):
     title: str
     description: str
     category: str
+    image_url: str | None = None
 
 
 # datos que devuelve backend (respuesta backend)
@@ -14,6 +15,7 @@ class ItemResponse(BaseModel):
     title: str
     description: str
     category: str
+    image_url: str | None = None
     owner_id: int
 
     class Config:

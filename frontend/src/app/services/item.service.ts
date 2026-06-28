@@ -42,7 +42,16 @@ export class ItemService {
         `${this.apiUrl}/${id}`, // url dinámica, /items/5
         item  // nuevos datos
       );
-    }
+  }
+  
+  uploadImage(file: File) {
+    // formData para enviar archivos y datos
+    const formData = new FormData();
+    // añadimos archivo, debe coincidir backend
+    formData.append('file', file);
+    // enviamsoo petición y recibe JSON
+    return this.http.post<{ image_url: string }>(`${this.apiUrl}/upload-image`, formData);
+  }
 
   deleteItem(id: number) {
     // delete al backend

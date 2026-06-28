@@ -97,15 +97,8 @@
                     Featured Image
                 </label>
             
-                <div class="image-placeholder">
-            
-                    <div class="image-icon">
-                        🖼️
-                    </div>
-            
-                    <p>Image upload coming soon</p>
-            
-                </div>
+                <!-- input tipo archivo, solo accepta formatos tipo imagen (filtra) -->
+                <input type="file" accept="image/*" (change)="onImageSelected($event)">
             
             </div>
 
